@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private Button btn;
     private ExpandableListView lvCategory;
 
@@ -59,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 1; i < 6; i++) {
 
             SubCategoryItem subCategoryItem = new SubCategoryItem();
-            subCategoryItem.setCategoryId(String.valueOf(i));
+            subCategoryItem.setCategoryId(dataItem.getCategoryId());
+            subCategoryItem.setSubId(String.valueOf(i));
             subCategoryItem.setIsChecked(ConstantManager.CHECK_BOX_CHECKED_FALSE);
             subCategoryItem.setSubCategoryName("Adventure: "+i);
             arSubCategory.add(subCategoryItem);
@@ -74,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
         for(int j = 1; j < 6; j++) {
 
             SubCategoryItem subCategoryItem = new SubCategoryItem();
-            subCategoryItem.setCategoryId(String.valueOf(j));
+            subCategoryItem.setCategoryId(dataItem.getCategoryId());
+            subCategoryItem.setSubId(String.valueOf(j));
             subCategoryItem.setIsChecked(ConstantManager.CHECK_BOX_CHECKED_FALSE);
             subCategoryItem.setSubCategoryName("Art: "+j);
             arSubCategory.add(subCategoryItem);
@@ -89,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
         for(int k = 1; k < 6; k++) {
 
             SubCategoryItem subCategoryItem = new SubCategoryItem();
-            subCategoryItem.setCategoryId(String.valueOf(k));
+            subCategoryItem.setCategoryId(dataItem.getCategoryId());
+            subCategoryItem.setSubId(String.valueOf(k));
             subCategoryItem.setIsChecked(ConstantManager.CHECK_BOX_CHECKED_FALSE);
             subCategoryItem.setSubCategoryName("Cooking: "+k);
             arSubCategory.add(subCategoryItem);

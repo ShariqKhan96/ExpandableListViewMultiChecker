@@ -3,6 +3,7 @@ package android.webinnovatives.com.expandablelistviewchecker;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class MyCategoriesExpandableListAdapter extends BaseExpandableListAdapter
     private HashMap<String, String> child;
     private int count = 0;
     private boolean isFromMyCategoriesFragment;
+    private static final String TAG = "ExpandableListAdapter";
 
     public MyCategoriesExpandableListAdapter(Activity activity, ArrayList<HashMap<String, String>> parentItems,
                                              ArrayList<ArrayList<HashMap<String, String>>> childItems, boolean isFromMyCategoriesFragment) {
@@ -84,7 +86,7 @@ public class MyCategoriesExpandableListAdapter extends BaseExpandableListAdapter
             viewHolderParent = new ViewHolderParent();
 
             viewHolderParent.tvMainCategoryName = convertView.findViewById(R.id.tvMainCategoryName);
-           // viewHolderParent.cbMainCategory = convertView.findViewById(R.id.cbMainCategory);
+            // viewHolderParent.cbMainCategory = convertView.findViewById(R.id.cbMainCategory);
             viewHolderParent.ivCategory = convertView.findViewById(R.id.ivCategory);
             convertView.setTag(viewHolderParent);
         } else {
@@ -92,11 +94,11 @@ public class MyCategoriesExpandableListAdapter extends BaseExpandableListAdapter
         }
 
         if (parentItems.get(groupPosition).get(ConstantManager.Parameter.IS_CHECKED).equalsIgnoreCase(ConstantManager.CHECK_BOX_CHECKED_TRUE)) {
-          //  viewHolderParent.cbMainCategory.setChecked(true);
+            //  viewHolderParent.cbMainCategory.setChecked(true);
             notifyDataSetChanged();
 
         } else {
-          //  viewHolderParent.cbMainCategory.setChecked(false);
+            //  viewHolderParent.cbMainCategory.setChecked(false);
             notifyDataSetChanged();
         }
 
@@ -133,6 +135,9 @@ public class MyCategoriesExpandableListAdapter extends BaseExpandableListAdapter
     public View getChildView(final int groupPosition, final int childPosition, final boolean b, View convertView, ViewGroup viewGroup) {
 
         final ViewHolderChild viewHolderChild;
+
+        //interface banakar mai pura child main mai bhej sakta hun yahan sai
+
         child = childItems.get(groupPosition).get(childPosition);
 
         if (convertView == null) {
@@ -146,6 +151,19 @@ public class MyCategoriesExpandableListAdapter extends BaseExpandableListAdapter
         } else {
             viewHolderChild = (ViewHolderChild) convertView.getTag();
         }
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //interface banakar mai pura child main mai bhej sakta hun yahan sai
+
+                Log.e(TAG, viewHolderChild.tvSubCategoryName.getText().toString());
+                Log.e(TAG,childItems.get(groupPosition).get(childPosition)+" ");
+//                Log.e(TAG,childItems.get(groupPosition).get(childPosition).get("sub_id")+" ");
+//                Log.e(TAG,childItems.get(groupPosition).get(childPosition).get("category_id")+" ");
+            }
+        });
 
         if (childItems.get(groupPosition).get(childPosition).get(ConstantManager.Parameter.IS_CHECKED).equalsIgnoreCase(ConstantManager.CHECK_BOX_CHECKED_TRUE)) {
             viewHolderChild.cbSubCategory.setChecked(true);
@@ -215,6 +233,7 @@ public class MyCategoriesExpandableListAdapter extends BaseExpandableListAdapter
         ImageView ivCategory;
     }
 
+    
     private class ViewHolderChild {
 
         TextView tvSubCategoryName;
